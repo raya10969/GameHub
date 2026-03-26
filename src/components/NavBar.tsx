@@ -1,13 +1,17 @@
-import { HStack, Image, Text } from "@chakra-ui/react";
-import logo from '../assets/logo.webp'
+import { HStack, Image, Text } from "@chakra-ui/react"
+import logo from "../assets/logo.webp"
+import ColorModeToggler from "./ColorModeToggler"
 
 const NavBar = () => {
     return (
-        <HStack>
-            <Image src={logo} width={'60px'}/>
-            <Text>Nav Bar</Text>
+        <HStack justify="space-between" width="full" px="3" py="2">
+            <HStack>
+                <Image src={logo} width="60px" />
+                <Text>Nav Bar</Text>
+            </HStack>
+            <ColorModeToggler />
         </HStack>
-    );
-};
+    )
+}
 
-export default NavBar;
+export default NavBar

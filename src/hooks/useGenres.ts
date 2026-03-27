@@ -1,6 +1,6 @@
 import {type Genres } from "@/modules/genres";
 import useData from "./useData";
 
-const useGame = () => useData<Genres>('/games');
+const useGenres = () => useData<Genres>('/genres');
 
-export default useGame;
+export default useGenres

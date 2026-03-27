@@ -1,9 +1,25 @@
 import useGenres from "@/hooks/useGenres";
 import getCroppedImageUrl from "@/services/image-url";
-import { Box, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, HStack, Image, Text, Skeleton } from "@chakra-ui/react";
 
 const GenreList = () => {
-  const { data } = useGenres();
+  const { data, isLoading } = useGenres();
+  const skeletons = [1, 2, 3, 4, 5, 6];
+
+  if (isLoading)
+    return (
+      <Box as="ul">
+        {skeletons.map((skeleton) => (
+          <Box as="li" key={skeleton} py={2}>
+            <HStack>
+              <Skeleton boxSize={9} borderRadius={5} />
+              <Skeleton width="80%" height={3} />
+            </HStack>
+          </Box>
+        ))}
+      </Box>
+    );
+
   return (
     <Box as="ul">
       {data.map((genre) => (

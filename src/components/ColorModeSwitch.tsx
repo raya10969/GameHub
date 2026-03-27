@@ -11,7 +11,7 @@ const ColorModeToggler = () => {
         checked={colorMode === "dark"}
         onCheckedChange={toggleColorMode}
         size={"sm"}
-        colorPalette={"teal"}
+        colorPalette={"green"}
       >
         <Switch.HiddenInput />
         <Switch.Control />

@@ -26,7 +26,7 @@ const GenreList = ({ onSelectGenre }: GenreListProps) => {
     );
 
   return (
-    <Box as="ul">
+    <Box as="ul" position="sticky" top="0" alignSelf="flex-start">
       {data.map((genre) => (
         <Box as="li" key={genre.id} py={2}>
           <HStack>

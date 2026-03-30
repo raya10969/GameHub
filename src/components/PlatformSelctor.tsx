@@ -1,8 +1,17 @@
 import usePlatforms from "@/hooks/usePlatforms";
+import type { Platform } from "@/modules/platform";
 import { Button, Icon, Menu, MenuItem } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
-const PlantformSelctor = () => {
+interface PlatformSelctorProps {
+  selectedPlatform: Platform | null;
+  onSelectPlatform: (platform: Platform) => void;
+}
+
+const PlatformSelctor = ({
+  selectedPlatform,
+  onSelectPlatform,
+}: PlatformSelctorProps) => {
   const { data, error } = usePlatforms();
 
   if (error) return null;
@@ -10,7 +19,7 @@ const PlantformSelctor = () => {
     <Menu.Root>
       <Menu.Trigger asChild>
         <Button variant="subtle">
-          Platfoms
+          {selectedPlatform?.name || "Platforms"}
           <Icon size="xs">
             <BsChevronDown />
           </Icon>
@@ -19,7 +28,11 @@ const PlantformSelctor = () => {
       <Menu.Positioner>
         <Menu.Content>
           {data.map((platform) => (
-            <MenuItem key={platform.id} value={platform.slug}>
+            <MenuItem
+              onClick={() => onSelectPlatform(platform)}
+              key={platform.id}
+              value={platform.slug}
+            >
               {platform.name}
             </MenuItem>
           ))}
@@ -29,4 +42,4 @@ const PlantformSelctor = () => {
   );
 };
 
-export default PlantformSelctor;
+export default PlatformSelctor;

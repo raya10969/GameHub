@@ -4,13 +4,15 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import type { Genre } from "@/modules/genre";
+import type { Platform } from "@/modules/platform";
 
 interface GameCardProps {
   selectedGenre: Genre | null;
+  selectedPlatform: Platform | null;
 }
 
-const GameGrid = ({ selectedGenre }: GameCardProps) => {
-  const { data, error, isLoading } = useGames(selectedGenre);
+const GameGrid = ({ selectedGenre, selectedPlatform }: GameCardProps) => {
+  const { data, error, isLoading } = useGames(selectedGenre, selectedPlatform);
   const skeletons = [1, 2, 3, 4, 5, 6];
   const gridProps = {
     padding: "3",
@@ -42,6 +44,7 @@ const GameGrid = ({ selectedGenre }: GameCardProps) => {
   return (
     <>
       {error && <Text>{error}</Text>}
+
       <SimpleGrid {...gridProps}>{renderGridItems()}</SimpleGrid>
     </>
   );

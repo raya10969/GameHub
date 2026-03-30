@@ -3,16 +3,16 @@ import logo from "../assets/logo.webp";
 import ColorModeToggler from "./ColorModeSwitch";
 
 interface NavBarProps {
-  onSelectAllGenres: () => void;
+  onReturnHome: () => void;
 }
 
-const NavBar = ({ onSelectAllGenres }: NavBarProps) => {
+const NavBar = ({ onReturnHome }: NavBarProps) => {
   return (
     <HStack justify="space-between" p="4">
       <HStack>
         <Image
           cursor="pointer"
-          onClick={onSelectAllGenres}
+          onClick={onReturnHome}
           src={logo}
           width="60px"
         />

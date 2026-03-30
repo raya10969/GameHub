@@ -31,7 +31,12 @@ const App = () => {
         }}
       >
         <GridItem area={"nav"}>
-          <NavBar onReturnHome={handleReturnHome} />
+          <NavBar
+            onReturnHome={handleReturnHome}
+            onSearch={(searchText) =>
+              setGameQuery({ ...gameQuery, searchText })
+            }
+          />
         </GridItem>
         <GridItem hideBelow={"lg"} area={"aside"} px={5}>
           <GenreList

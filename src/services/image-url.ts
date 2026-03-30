@@ -1,7 +1,7 @@
-const PLACEHOLDER_IMAGE_URL = "https://via.placeholder.com/600x400?text=No+Image";
+import noImage from '../assets/no-image-placeholder.webp'
 
 const getCroppedImageUrl = (url?: string | null) => {
-    if (!url) return PLACEHOLDER_IMAGE_URL;
+    if (!url) return noImage;
 
     const target = "media/";
     const index = url.indexOf(target);

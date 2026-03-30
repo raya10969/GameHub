@@ -30,13 +30,14 @@ const PlatformIconList = ({ platforms }: IconListProps) => {
   };
   return (
     <HStack my="1">
-      {platforms.map((platform) => (
-        <Icon
-          as={iconMap[platform.slug]}
-          key={platform.id}
-          color="gray.500"
-        ></Icon>
-      ))}
+      {platforms.map((platform) => {
+        const IconComponent = iconMap[platform.slug];
+        if (!IconComponent) return null;
+
+        return (
+          <Icon as={IconComponent} key={platform.id} color="gray.500"></Icon>
+        );
+      })}
     </HStack>
   );
 };

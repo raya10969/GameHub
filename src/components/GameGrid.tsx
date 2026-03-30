@@ -44,7 +44,9 @@ const GameGrid = ({ selectedGenre, selectedPlatform }: GameCardProps) => {
   return (
     <>
       {error && <Text>{error}</Text>}
-
+      {!isLoading && !error && data.length === 0 && (
+        <Text color="gray.500">该筛选条件下暂无游戏数据。</Text>
+      )}
       <SimpleGrid {...gridProps}>{renderGridItems()}</SimpleGrid>
     </>
   );

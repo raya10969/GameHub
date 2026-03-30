@@ -3,16 +3,14 @@ import { SimpleGrid, Text } from "@chakra-ui/react";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import type { Genre } from "@/modules/genre";
-import type { Platform } from "@/modules/platform";
+import type { GameQuery } from "@/modules/gameQuery";
 
 interface GameCardProps {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  gameQuery: GameQuery;
 }
 
-const GameGrid = ({ selectedGenre, selectedPlatform }: GameCardProps) => {
-  const { data, error, isLoading } = useGames(selectedGenre, selectedPlatform);
+const GameGrid = ({ gameQuery }: GameCardProps) => {
+  const { data, error, isLoading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
   const gridProps = {
     padding: "3",

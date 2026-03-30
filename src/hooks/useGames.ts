@@ -1,9 +1,8 @@
 import {type Game } from "@/modules/game";
 import useData from "./useData";
-import type { Genre } from "@/modules/genre";
-import type { Platform } from "@/modules/platform";
+import type { GameQuery } from "@/modules/gameQuery";
 
-const useGame = (selectedGenre: Genre | null, selectedPlatform: Platform | null) => 
-    useData<Game>('/games', {params: {genres:selectedGenre?.id, parent_platforms:selectedPlatform?.id}}, [selectedGenre?.id, selectedPlatform?.id]);
+const useGame = (gameQuery: GameQuery) => 
+    useData<Game>('/games', {params: {genres:gameQuery.genre?.id, parent_platforms:gameQuery.platform?.id}}, [gameQuery]);
 
 export default useGame;

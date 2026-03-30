@@ -5,9 +5,10 @@ import { Box, HStack, Image, Skeleton, Button, Text } from "@chakra-ui/react";
 
 interface GenreListProps {
   onSelectGenre: (genre: Genre) => void;
+  SelectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre }: GenreListProps) => {
+const GenreList = ({ onSelectGenre, SelectedGenre }: GenreListProps) => {
   const { data, isLoading } = useGenres();
   const skeletons = [1, 2, 3, 4, 5, 6];
 
@@ -43,7 +44,8 @@ const GenreList = ({ onSelectGenre }: GenreListProps) => {
             >
               <Text
                 textAlign="left"
-                fontSize="lg"
+                fontSize={genre.id === SelectedGenre?.id ? "xl" : "lg"}
+                fontWeight={genre.id === SelectedGenre?.id ? "bold" : "normal"}
                 whiteSpace="wrap"
                 lineHeight={1.5}
               >

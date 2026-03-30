@@ -11,6 +11,8 @@ const App = () => {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   const handleReturnHome = () => {
+    console.log(gameQuery.genre);
+    console.log(gameQuery.sortOrder);
     setGameQuery({} as GameQuery);
   };
 
@@ -45,7 +47,12 @@ const App = () => {
                 setGameQuery({ ...gameQuery, platform })
               }
             />
-            <SortSelector />
+            <SortSelector
+              sortOrder={gameQuery.sortOrder}
+              onSelectedOrder={(sortOrder) => {
+                setGameQuery({ ...gameQuery, sortOrder });
+              }}
+            />
           </HStack>
           <GameGrid gameQuery={gameQuery} />
         </GridItem>

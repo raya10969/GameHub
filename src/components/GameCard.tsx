@@ -12,19 +12,19 @@ const GameCard = ({ game }: GameCardProps) => {
   const parentPlatforms = game.parent_platforms ?? [];
 
   return (
-    <Card.Root>
+    <Card.Root overflow="hidden">
       <Image
         src={getCroppedImageUrl(game.background_image)}
         alt={`Background image of ${game.name}`}
       />
       <Card.Body>
-        <Heading>{game.name}</Heading>
-        <HStack justifyContent="space-between">
+        <HStack justifyContent="space-between" mb="3">
           <PlatformIconList
             platforms={parentPlatforms.map((p) => p.platform)}
           />
           <CriticScore score={game.metacritic} />
         </HStack>
+        <Heading>{game.name}</Heading>
       </Card.Body>
     </Card.Root>
   );

@@ -20,8 +20,8 @@ const GameGrid = ({ gameQuery }: GameCardProps) => {
       lg: 3,
       xl: 4,
     },
-    gap: "3",
-  } as const;
+    gap: "6",
+  };
 
   const renderGridItems = () => {
     if (isLoading) {

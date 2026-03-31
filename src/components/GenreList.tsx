@@ -1,7 +1,15 @@
 import useGenres from "@/hooks/useGenres";
 import { type Genre } from "@/modules/genre";
 import getCroppedImageUrl from "@/services/image-url";
-import { Box, HStack, Image, Skeleton, Button, Text } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  Image,
+  Skeleton,
+  Button,
+  Text,
+  Heading,
+} from "@chakra-ui/react";
 
 interface GenreListProps {
   onSelectGenre: (genre: Genre) => void;
@@ -27,35 +35,43 @@ const GenreList = ({ onSelectGenre, SelectedGenre }: GenreListProps) => {
     );
 
   return (
-    <Box as="ul" position="sticky" top="0" alignSelf="flex-start">
-      {data.map((genre) => (
-        <Box as="li" key={genre.id} py={2}>
-          <HStack>
-            <Image
-              boxSize={9}
-              borderRadius={5}
-              src={getCroppedImageUrl(genre.image_background)}
-            />
-            <Button
-              onClick={() => onSelectGenre(genre)}
-              width="80%"
-              variant="ghost"
-              justifyContent="flex-start"
-            >
-              <Text
-                textAlign="left"
-                fontSize={genre.id === SelectedGenre?.id ? "xl" : "lg"}
-                fontWeight={genre.id === SelectedGenre?.id ? "bold" : "normal"}
-                whiteSpace="wrap"
-                lineHeight={1.5}
+    <>
+      <Heading fontSize="2xl" my="3">
+        Genres
+      </Heading>
+      <Box as="ul" position="sticky" top="0" alignSelf="flex-start">
+        {data.map((genre) => (
+          <Box as="li" key={genre.id} py={2}>
+            <HStack>
+              <Image
+                boxSize={9}
+                borderRadius={5}
+                objectFit="cover"
+                src={getCroppedImageUrl(genre.image_background)}
+              />
+              <Button
+                onClick={() => onSelectGenre(genre)}
+                width="80%"
+                variant="ghost"
+                justifyContent="flex-start"
               >
-                {genre.name}
-              </Text>
-            </Button>
-          </HStack>
-        </Box>
-      ))}
-    </Box>
+                <Text
+                  textAlign="left"
+                  fontSize={genre.id === SelectedGenre?.id ? "xl" : "lg"}
+                  fontWeight={
+                    genre.id === SelectedGenre?.id ? "bold" : "normal"
+                  }
+                  whiteSpace="wrap"
+                  lineHeight={1.5}
+                >
+                  {genre.name}
+                </Text>
+              </Button>
+            </HStack>
+          </Box>
+        ))}
+      </Box>
+    </>
   );
 };
 

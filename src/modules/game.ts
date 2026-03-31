@@ -6,4 +6,5 @@ export interface Game {
   background_image: string | null;
   parent_platforms?: { platform: Platform }[];
   metacritic: number | null;
+  rating_top: number | null;
 }

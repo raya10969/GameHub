@@ -32,7 +32,7 @@ const GameGrid = ({ gameQuery }: GameCardProps) => {
       ));
     }
 
-    return data.map((game) => (
+    return data?.results.map((game) => (
       <GameCardContainer key={game.id}>
         <GameCard game={game} />
       </GameCardContainer>
@@ -41,8 +41,8 @@ const GameGrid = ({ gameQuery }: GameCardProps) => {
 
   return (
     <>
-      {error && <Text>{error}</Text>}
-      {!isLoading && !error && data.length === 0 && (
+      {error && <Text>{error.message}</Text>}
+      {!isLoading && !error && data?.results.length === 0 && (
         <Text color="gray.500">该筛选条件下暂无游戏数据。</Text>
       )}
       <SimpleGrid {...gridProps}>{renderGridItems()}</SimpleGrid>

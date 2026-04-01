@@ -40,7 +40,7 @@ const GenreList = ({ onSelectGenre, SelectedGenre }: GenreListProps) => {
         Genres
       </Heading>
       <Box as="ul" position="sticky" top="0" alignSelf="flex-start">
-        {data.map((genre) => (
+        {data?.results.map((genre) => (
           <Box as="li" key={genre.id} py={2}>
             <HStack>
               <Image

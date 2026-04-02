@@ -12,11 +12,11 @@ import {
 } from "@chakra-ui/react";
 
 interface GenreListProps {
+  SelectedGenreId?: number;
   onSelectGenre: (genre: Genre) => void;
-  SelectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre, SelectedGenre }: GenreListProps) => {
+const GenreList = ({ SelectedGenreId, onSelectGenre }: GenreListProps) => {
   const { data, isLoading } = useGenres();
   const skeletons = [1, 2, 3, 4, 5, 6];
 
@@ -57,9 +57,9 @@ const GenreList = ({ onSelectGenre, SelectedGenre }: GenreListProps) => {
               >
                 <Text
                   textAlign="left"
-                  fontSize={genre.id === SelectedGenre?.id ? "xl" : "lg"}
+                  fontSize={genre.id === SelectedGenreId ? "xl" : "lg"}
                   fontWeight={
-                    genre.id === SelectedGenre?.id ? "bold" : "normal"
+                    genre.id === SelectedGenreId ? "bold" : "normal"
                   }
                   whiteSpace="wrap"
                   lineHeight={1.5}

@@ -4,12 +4,12 @@ import { Button, Icon, Menu, MenuItem } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
 interface PlatformSelctorProps {
-  selectedPlatform: Platform | null;
+  selectedPlatformName?: string;
   onSelectPlatform: (platform: Platform) => void;
 }
 
 const PlatformSelctor = ({
-  selectedPlatform,
+  selectedPlatformName,
   onSelectPlatform,
 }: PlatformSelctorProps) => {
   const { data, error } = usePlatforms();
@@ -19,7 +19,7 @@ const PlatformSelctor = ({
     <Menu.Root>
       <Menu.Trigger asChild>
         <Button variant="subtle">
-          {selectedPlatform?.name || "Platforms"}
+          {selectedPlatformName ?? "Platforms"}
           <Icon size="xs">
             <BsChevronDown />
           </Icon>

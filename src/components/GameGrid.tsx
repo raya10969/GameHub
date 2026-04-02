@@ -1,19 +1,27 @@
 import useGames from "@/hooks/useGames";
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Button, SimpleGrid, Text } from "@chakra-ui/react";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import type { GameQuery } from "@/modules/gameQuery";
+import React from "react";
 
 interface GameCardProps {
   gameQuery: GameQuery;
 }
 
 const GameGrid = ({ gameQuery }: GameCardProps) => {
-  const { data, error, isLoading } = useGames(gameQuery);
+  const {
+    data,
+    error,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    isFetchNextPageError,
+  } = useGames(gameQuery);
+
   const skeletons = [1, 2, 3, 4, 5, 6];
   const gridProps = {
-    padding: "3",
     columns: {
       base: 1,
       md: 2,
@@ -32,21 +40,30 @@ const GameGrid = ({ gameQuery }: GameCardProps) => {
       ));
     }
 
-    return data?.results.map((game) => (
-      <GameCardContainer key={game.id}>
-        <GameCard game={game} />
-      </GameCardContainer>
+    return data?.pages.map((page, idx) => (
+      <React.Fragment key={idx}>
+        {page.results.map((game) => (
+          <GameCardContainer key={game.id}>
+            <GameCard game={game} />
+          </GameCardContainer>
+        ))}
+      </React.Fragment>
     ));
   };
 
   return (
-    <>
+    <Box p="3">
       {error && <Text>{error.message}</Text>}
-      {!isLoading && !error && data?.results.length === 0 && (
+      {!isLoading && !error && data?.pages[0].count === 0 && (
         <Text color="gray.500">该筛选条件下暂无游戏数据。</Text>
       )}
       <SimpleGrid {...gridProps}>{renderGridItems()}</SimpleGrid>
-    </>
+      {hasNextPage && (
+        <Button onClick={() => fetchNextPage()} my="5">
+          {isFetchNextPageError ? "Loading" : "Load More"}
+        </Button>
+      )}
+    </Box>
   );
 };
 

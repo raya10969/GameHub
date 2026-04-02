@@ -1,7 +1,8 @@
-import type { Game } from "@/modules/game";
-import type { GameQuery } from "@/modules/gameQuery";
-import ApiClient from "@/services/api-client";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
+import ms from 'ms'
+import ApiClient from "@/services/api-client";
+import type { GameQuery } from "@/modules/gameQuery";
+import type { Game } from "@/modules/game";
 
 const apiClient = new ApiClient<Game>("/games");
 
@@ -19,7 +20,7 @@ const useGame = (gameQuery: GameQuery) =>
         },
       }),
     initialPageParam: 1,
-    staleTime: 300_000,
+    staleTime: ms('5m'),
     placeholderData: keepPreviousData,
     getNextPageParam: (lastPage, allPage) => {
       return lastPage.next ? allPage.length + 1 : undefined;

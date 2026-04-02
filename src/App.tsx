@@ -7,11 +7,9 @@ import PlatformSelctor from "./components/PlatformSelctor";
 import type { GameQuery } from "./modules/gameQuery";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
-import type { QueryNames } from "./modules/queryNames";
 
 const App = () => {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-  const [queryNames, setQueryNames] = useState<QueryNames>({} as QueryNames)
 
   const handleReturnHome = () => {
     setGameQuery({} as GameQuery);
@@ -44,18 +42,16 @@ const App = () => {
             SelectedGenreId={gameQuery.genreId}
             onSelectGenre={(genre) => {
               setGameQuery({ ...gameQuery, genreId: genre.id });
-              setQueryNames({ ... queryNames, genre: genre.name})
             }}
           />
         </GridItem>
         <GridItem area={"main"} px="3">
-          <GameHeading queryNames={queryNames} />
+          <GameHeading gameQuery={gameQuery} />
           <HStack gap="5" mt="5" mb="7">
             <PlatformSelctor
-              selectedPlatformName={queryNames.platform}
+              selectedPlatformId={gameQuery.platformId}
               onSelectPlatform={(platform) => {
                 setGameQuery({ ...gameQuery, platformId: platform.id });
-                setQueryNames({ ...queryNames, platform: platform.name})
               }
               }
               />

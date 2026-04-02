@@ -1,5 +1,5 @@
 import useGames from "@/hooks/useGames";
-import { Box, Button, SimpleGrid, Text } from "@chakra-ui/react";
+import { Button, SimpleGrid, Text } from "@chakra-ui/react";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
@@ -52,18 +52,18 @@ const GameGrid = ({ gameQuery }: GameCardProps) => {
   };
 
   return (
-    <Box p="3">
+    <>
       {error && <Text>{error.message}</Text>}
       {!isLoading && !error && data?.pages[0].count === 0 && (
         <Text color="gray.500">该筛选条件下暂无游戏数据。</Text>
       )}
       <SimpleGrid {...gridProps}>{renderGridItems()}</SimpleGrid>
       {hasNextPage && (
-        <Button onClick={() => fetchNextPage()} my="5">
+        <Button onClick={() => fetchNextPage()} my="7">
           {isFetchNextPageError ? "Loading" : "Load More"}
         </Button>
       )}
-    </Box>
+    </>
   );
 };
 
